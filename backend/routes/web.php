@@ -21,12 +21,6 @@ Route::post('/sendContact', [HomeController::class, 'sendContact'])->name('conta
 Route::get('/about', [HomeController::class, 'about']);
 Route::get('/mentions-legales', [HomeController::class, 'mentionsLegales']);
 
-// Route::get('/afficheFormulaire', 'FormController@showForm');
-Route::get('/showForm', [FormController::class,'showForm']);
-
-// Route::post('/manageForm', 'FormController@manageForm');
-route::post('/manageForm', [FormController::class,'manageForm']);
-
 // Routes pour la connexion
 Route::get('/login', [FormController::class, 'showLoginForm'])->name('showLoginForm');
 Route::post('/login', [FormController::class, 'login']);
@@ -63,19 +57,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
 // Route pour la confirmation de l'email
 Route::get('confirmation/{token}', [RegisterController::class, 'confirmEmail'])->name('confirmation');
-
-// Route de test pour l'envoi d'emails
-Route::get('/test-email', function () {
-    try {
-        Mail::raw('Test email depuis TaskForce', function ($message) {
-            $message->to('test@example.com')
-                   ->subject('Test Email');
-        });
-        return 'Email de test envoyé! Vérifiez Mailtrap.';
-    } catch (\Exception $e) {
-        return 'Erreur : ' . $e->getMessage();
-    }
-});
 
 // Routes de vérification d'email
 Route::get('/email/verify', function () {
