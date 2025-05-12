@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Taskforce - Application de gestion de tâches">
+  <meta name="theme-color" content="#4F46E5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Taskforce">
+  <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+  <link rel="mask-icon" href="/icons/maskable_icon.png" color="#4F46E5">
+  <link rel="manifest" href="/manifest.json">
+  <title>Taskforce</title>
+  <script>
+    // Fonction pour détecter les problèmes de connectivité réseau
+    window.addEventListener('online', () => {
+      console.log('Application en ligne');
+      localStorage.setItem('isOnline', 'true');
+      if (window.dispatchEvent) {
+        window.dispatchEvent(new CustomEvent('app-online'));
+      }
+    });
+    
+    window.addEventListener('offline', () => {
+      console.log('Application hors ligne');
+      localStorage.setItem('isOnline', 'false');
+      if (window.dispatchEvent) {
+        window.dispatchEvent(new CustomEvent('app-offline'));
+      }
+    });
+    
+    // Vérifier l'état initial
+    if (navigator.onLine) {
+      localStorage.setItem('isOnline', 'true');
+    } else {
+      localStorage.setItem('isOnline', 'false');
+    }
+  </script>
+</head>
+<body class="bg-gray-100">
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+  <noscript>
+    <div class="p-4 bg-red-100 text-red-800 text-center">
+      Cette application nécessite JavaScript pour fonctionner correctement.
+    </div>
+  </noscript>
+</body>
+</html> 
